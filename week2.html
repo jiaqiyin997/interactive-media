@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>我的学习流程</title>
+    <style>
+      /* 基础样式 */
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: "Pacifico", cursive;
+        background-color: #ffe4e1; /* 淡粉色背景 */
+        overflow: hidden; /* 避免出现页面滚动条 */
+        position: relative;
+        height: 100vh;
+      }
+
+      .container {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        padding: 40px 0;
+        position: relative; /* 让内容位于泡泡之上 */
+        z-index: 1;
+      }
+
+      /* 标题 */
+      h1 {
+        margin: 0;
+        padding-bottom: 20px;
+      }
+
+      /* 返回上一页按钮样式 */
+      .back-button {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 8px 16px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        border: none;
+        background-color: #ffb6c1; /* 浅粉色按钮 */
+        color: #fff;
+        transition: background-color 0.3s;
+      }
+      .back-button:hover {
+        background-color: #ff99aa; /* 悬停时稍微变深 */
+      }
+
+      /* 图片/视频行容器 */
+      .image-row {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap; /* 如果视口过窄，内容会自动换行 */
+      }
+
+      /* 将图片和视频裁剪为圆形 */
+      .image-row img,
+      .image-row video {
+        width: 300px;
+        height: 200px;
+        object-fit: cover; /* 让内容填充整个圆形区域 */
+        margin: 10px;
+        cursor: pointer;   /* 鼠标悬停时显示手型 */
+        border: 2px solid #fff;
+        border-radius: 8px;
+        transition: transform 0.3s;
+      }
+      .image-row img:hover,
+      .image-row video:hover {
+        transform: scale(1.05); /* 鼠标悬停时轻微放大 */
+      }
+
+      /* 弹出层（模态窗口）样式 */
+      .modal {
+        display: none;           /* 默认隐藏弹出层 */
+        position: fixed;         /* 固定在当前视口 */
+        z-index: 999;            /* 置于最顶层 */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.8); /* 半透明黑色背景 */
+      }
+
+      /* 弹出层中的图片和视频 */
+      .modal-content {
+        display: block;
+        margin: 20px auto;
+        max-width: 40%; /* 调整为40%，可根据需要微调 */
+      }
+
+      /* 弹出层中的说明文字 */
+      .caption {
+        color: #fff;
+        text-align: center;
+        font-size: 20px;
+        margin-top: 20px;
+      }
+
+      /* 关闭按钮样式 */
+      .close {
+        position: absolute;
+        top: 50px;
+        right: 70px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      /* ===================== 泡泡背景部分 ===================== */
+      /* 泡泡容器，位于最底层 */
+      .bubbles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;           /* 确保泡泡在内容后面 */
+        overflow: hidden;     /* 隐藏超出屏幕区域的泡泡 */
+        pointer-events: none; /* 不影响鼠标交互 */
+      }
+
+      /* 单个泡泡的基本样式 */
+      .bubble {
+        position: absolute;
+        bottom: -100px;                /* 初始位置在可视区域下方 */
+        width: 40px;
+        height: 40px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        animation: rise 10s linear infinite;
+      }
+
+      /* 动画关键帧：从底部上升到顶部 */
+      @keyframes rise {
+        0% {
+          transform: translateY(0) scale(1);
+        }
+        100% {
+          transform: translateY(-120vh) scale(1.5);
+        }
+      }
+      /* 针对不同泡泡做微调 */
+      .bubble:nth-child(1) {
+        left: 10%;
+        animation-delay: 0s;
+        animation-duration: 8s;
+        width: 60px;
+        height: 60px;
+      }
+      .bubble:nth-child(2) {
+        left: 30%;
+        animation-delay: 2s;
+        animation-duration: 8.5s;
+      }
+      .bubble:nth-child(3) {
+        left: 50%;
+        animation-delay: 4s;
+        animation-duration: 9s;
+      }
+      .bubble:nth-child(4) {
+        left: 70%;
+        animation-delay: 1s;
+        animation-duration: 10s;
+      }
+      .bubble:nth-child(5) {
+        left: 90%;
+        animation-delay: 3s;
+        animation-duration: 8s;
+        width: 50px;
+        height: 50px;
+      }
+      .bubble:nth-child(6) {
+        left: 20%;
+        animation-delay: 5s;
+        animation-duration: 9s;
+      }
+      .bubble:nth-child(7) {
+        left: 40%;
+        animation-delay: 3.5s;
+        animation-duration: 8s;
+        width: 70px;
+        height: 70px;
+      }
+      .bubble:nth-child(8) {
+        left: 60%;
+        animation-delay: 6s;
+        animation-duration: 11s;
+      }
+      .bubble:nth-child(9) {
+        left: 80%;
+        animation-delay: 4.5s;
+        animation-duration: 9s;
+        width: 55px;
+        height: 55px;
+      }
+      .bubble:nth-child(10) {
+        left: 25%;
+        animation-delay: 7s;
+        animation-duration: 10s;
+      }
+
+      /* ===================== 页面底部小人 ===================== */
+      .characters {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        padding: 0 20px; /* 两边留些间距 */
+        z-index: 100;
+      }
+      .characters img {
+        width: 200px; /* 根据需要调整尺寸 */
+        height: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 泡泡容器 -->
+    <div class="bubbles">
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+    </div>
+
+    <!-- 内容容器 -->
+    <div class="container">
+      <!-- 标题 -->
+      <h1>My week 2 Progress & web-development</h1>
+      
+      <!-- 返回上一页按钮 -->
+      <button class="back-button" onclick="history.back()">HOME</button>
+
+      <!-- 图片/视频行 -->
+      <div class="image-row">
+        <!-- 第一个保持图片 -->
+        <img src="./week2progress/IW2.jpeg" alt="图片1" onclick="openModal('./week2progress/IW2.jpeg', 'The crazy 8. We brainstormed 8 different design ideas for the website and did a pin up.')" />
+        <!-- 第二个改为视频 -->
+        <video src="./week2progress/video1.mp4" alt="视频2" onclick="openModal('./week2progress/video1.mp4', 'My first design progress, parallelograms that can be stretched wider when hover.')" controls></video>
+        <!-- 第三个改为视频 -->
+        <video src="./week2progress/video2.mp4" alt="视频3" onclick="openModal('./week2progress/video2.mp4', 'My second design idea, typewriting machine design with a colorful background.')" controls></video>
+      </div>
+    </div>
+
+    <!-- 弹出层（模态窗口） -->
+    <div id="myModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <!-- 默认两者均隐藏，根据点击内容显示 -->
+      <img class="modal-content" id="modalImg" style="display:none;" />
+      <video class="modal-content" id="modalVideo" style="display:none;" controls></video>
+      <div class="caption" id="caption"></div>
+    </div>
+
+    <!-- 页面底部小人（替换为 GIF 文件） -->
+    <div class="characters">
+      <img src="img/output-onlinegiftools.gif" alt="小人动画1" />
+      <img src="img/output-onlinegiftools.gif" alt="小人动画2" />
+    </div>
+
+    <!-- JS控制逻辑 -->
+    <script>
+      // 打开模态并展示点击的图片或视频及说明文字
+      function openModal(src, captionText) {
+        var modal = document.getElementById('myModal');
+        var modalImg = document.getElementById('modalImg');
+        var modalVideo = document.getElementById('modalVideo');
+        var caption = document.getElementById('caption');
+        
+        modal.style.display = "block";
+        caption.textContent = captionText;
+        
+        // 判断文件类型，如果是视频，则显示视频元素
+        if(src.endsWith('.mp4') || src.endsWith('.webm')) {
+          modalImg.style.display = "none";
+          modalVideo.style.display = "block";
+          modalVideo.src = src;
+          modalVideo.play();
+        } else {
+          modalVideo.style.display = "none";
+          modalImg.style.display = "block";
+          modalImg.src = src;
+        }
+      }
+
+      // 关闭模态
+      function closeModal() {
+        var modal = document.getElementById('myModal');
+        var modalVideo = document.getElementById('modalVideo');
+        modal.style.display = "none";
+        modalVideo.pause();
+        modalVideo.currentTime = 0;
+      }
+    </script>
+  </body>
+</html>
