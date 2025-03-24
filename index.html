@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>landing page</title>
+ 
+  <style>
+    /* set style for html and body */
+    html, body {
+      margin: 0; 
+      padding: 0; 
+      height: 200vh; /*have more scroll space*/
+      overflow-x: hidden; /* cannot scroll horizontally */
+      transition: opacity 0.5s ease-out; /* set the opacity */
+    }
+ 
+    body.fade-out {
+      opacity: 0; 
+    }
+
+    /* hole style */
+    .hole {
+      position: fixed; 
+      top: 0;
+      left: 0;
+      width: 100%; 
+      height: 100%; 
+      background: #ff99aa; 
+      /* start as a small circle */
+      clip-path: circle(50px at 50% 50%);
+      /* set clippath  */
+      transition: clip-path 0.2s ease-out;
+      /* set animation */
+      z-index: 1000; 
+      pointer-events: none; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden; 
+    }
+
+    /* set text style */
+    .circle-text {
+      color: #fff; 
+      font-size: 12px; 
+      transition: opacity 0.2s ease-out, font-size 0.2s ease-out;
+      white-space: nowrap; /* no line change */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- the circle and text inside the circle -->
+  <div class="hole">
+    <!-- circle-text -->
+    <div class="circle-text">Scroll Up</div>
+  </div>
+
+  <script>
+    // Listen for scroll events
+    window.addEventListener('scroll', function() {
+      const maxScroll = 300; 
+      const scrollTop = window.scrollY; // Get the current vertical scroll position
+      const minRadius = 50; 
+      
+      // Calculate the maximum radius needed to cover the screen 
+      // (using the Pythagorean theorem to compute the screen's diagonal length)
+      const maxRadius = Math.hypot(window.innerWidth, window.innerHeight);
+      
+      // Calculate the current circle's radius based on the scroll ratio
+      // As the scroll reaches the threshold, the circle's radius increases from minRadius to maxRadius
+      const radius = minRadius + (maxRadius - minRadius) * Math.min(scrollTop / maxScroll, 1);
+      
+      // Set the clip-path of the .hole element to form a circle centered in the viewport with a dynamically changing radius
+      document.querySelector('.hole').style.clipPath = `circle(${radius}px at 50% 50%)`;
+
+      // Adjust the text's opacity based on the scroll ratio; the more you scroll, the lower the opacity
+      const textOpacity = 1 - Math.min(scrollTop / maxScroll, 1);
+      const textEl = document.querySelector('.circle-text');
+      textEl.style.opacity = textOpacity;
+      
+      // Set the text size relative to the circle's radius (adjust the ratio as needed)
+      textEl.style.fontSize = (radius * 0.35) + 'px';
+
+      // When the scroll distance reaches or exceeds the threshold, trigger a fade-out animation and then redirect to main.html
+      if (scrollTop >= maxScroll) {
+        // Add the fade-out class
+        document.body.classList.add('fade-out');
+        // Wait 500 milliseconds for the fade-out animation to complete before redirecting
+        setTimeout(() => {
+          window.location.href = "main.html";
+        }, 500);
+      }
+    });
+</script>
+
+</body>
+</html>
