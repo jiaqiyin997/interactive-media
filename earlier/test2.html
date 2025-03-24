@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>依次显示的高窄斜平行四边形</title>
+  <style>
+    /* 整体页面居中显示 */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    /* 容器用于横向排列 */
+    .container {
+      display: flex;
+      flex-direction: row;
+    }
+    /* 平行四边形基础样式 */
+    .parallelogram {
+      width: 200px;
+      height: 500px;
+      transform: skew(-20deg);
+      transform-origin: center;
+      transition: width 0.3s ease;
+      cursor: pointer;
+      opacity: 0;
+      /* 添加出现的动画 */
+      animation: appear 0.5s ease forwards;
+    }
+    /* 鼠标悬停时向两边拉开 */
+    .parallelogram:hover {
+      width: 400px;
+      /* height: 600px; */
+    }
+    /* 为每个平行四边形设置不同颜色，并设置动画延时 */
+    .parallelogram:nth-child(1) { background-color: #FF5733; animation-delay: 0s; }
+    .parallelogram:nth-child(2) { background-color: #33FF57; animation-delay: 0.2s; }
+    .parallelogram:nth-child(3) { background-color: #3357FF; animation-delay: 0.4s; }
+    .parallelogram:nth-child(4) { background-color: #FF33A8; animation-delay: 0.6s; }
+    .parallelogram:nth-child(5) { background-color: #FFC300; animation-delay: 0.8s; }
+    
+    /* 定义出现动画 */
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(20px) skew(-20deg);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) skew(-20deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="parallelogram"></div>
+    <div class="parallelogram"></div>
+    <div class="parallelogram"></div>
+    <div class="parallelogram"></div>
+    <div class="parallelogram"></div>
+  </div>
+</body>
+</html>
