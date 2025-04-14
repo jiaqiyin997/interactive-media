@@ -1,0 +1,240 @@
+@import './font.css';
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e3e3db;
+  font-family: 'Saans TRIAL', sans-serif;
+}
+
+img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 72px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 0.9;
+}
+
+p {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.intro, .outro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.awards {
+  min-height: 100vh;
+  height: max-content;
+}
+
+.awards p {
+  padding: 5px 20px;
+}
+
+.awards-list {
+  border-top: 1px solid #000;
+}
+
+/* .award {
+  height: 80px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.award-wrapper {
+  position: relative;
+  height: 240px;
+  will-change: transform;
+  transform: translateY(-160px);
+}
+
+.award-name, .award-project {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 5px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #000;
+} */
+
+.award {
+  height: 50px;  /* 修改为 50px */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.award-wrapper {
+  position: relative;
+  height: 150px;   /* 3 * 50px */
+  will-change: transform;
+  transform: translateY(-100px);  /* 默认状态显示第三部分 */
+}
+
+.award-name, .award-project {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;  /* 修改为 50px */
+  padding: 5px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #000;
+}
+
+/* 针对奖项区域的标题调整字体 */
+.award-name h1,
+.award-project h1 {
+  font-family: 'Roboto', sans-serif; /* 使用 Roboto 字体 */
+  font-weight: 300;                  /* 300 权重为细体 */
+  font-size: 18px;                   /* 根据新尺寸设置字号 */
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+
+
+
+.award-name {
+  background-color: #00000027;
+  color: #000000;
+}
+
+
+
+.award-project {
+  background-color: #20ce0c;
+  color: #000000;
+}
+
+.award-preview {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  width: 30%;
+  height: 30%;
+  z-index: 2;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+}
+/* 线条：白色，线宽0.1，动画结束保持状态 */
+line {
+  stroke: #fff;
+  stroke-width: 0.1;
+  fill: none;
+  animation-fill-mode: forwards;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+  cursor: default;
+}
+/* 主线动画：2秒描线 */
+#lineMain {
+  animation: drawMain 2s linear forwards;
+}
+@keyframes drawMain {
+  to { stroke-dashoffset: 0; }
+}
+/* 分支线段动画：1秒描线 */
+@keyframes drawSub {
+  to { stroke-dashoffset: 0; }
+}
+/* 悬停线条时变色并加粗 */
+line:hover {
+  stroke: #ff2c8a;
+  stroke-width: 0.2;
+}
+
+/* 矩形淡入动画：1秒或更久 */
+@keyframes fadeInRect {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+
+
+.intro {
+  position: relative;    /* 让 .intro 成为定位父容器 */
+  width: 100%;
+  min-height: 100vh;     /* 占满可视高度或你需要的高度 */
+  /* 如果有背景或动画，可在这里或用子元素 .some-background 实现 */
+}
+
+/* 叠加在上层的矩形，居中显示 */
+.welcome-overlay {
+  position: absolute;
+  top: 50%;              /* 父元素的 50% 高度处 */
+  left: 50%;             /* 父元素的 50% 宽度处 */
+  transform: translate(-50%, -50%); /* 自身宽高的一半，居中 */
+  background-color: rgba(255, 255, 255, 0.9); /* 半透明白 */
+  padding: 20px 40px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 2;            /* 盖在背景之上 */
+  text-align: center;
+}
+
+/* 打字机效果核心部分 */
+.typewriter {
+  display: inline-block;   /* 让打字机动画在内容宽度上执行 */
+  overflow: hidden;        /* 隐藏多余文本，配合打字机动画 */
+  white-space: nowrap;     /* 不换行，横向滚动文字 */
+  border-right: 2px solid #333; /* “光标”样式，竖线 */
+  /* 下面两行定义动画： typing & blink */
+  animation: typing 3s steps(22, end) 1s 1 normal both,
+             blink 0.75s step-end infinite alternate;
+  /* 
+     解读：
+     - typing 3s steps(22, end): 在3秒内完成22步（文本长度）的描绘
+     - 1s延时开始
+     - 1次执行
+     - normal: 正常方向
+     - both: 保留动画结束状态（显示整行文字）
+     
+     blink 0.75s step-end infinite alternate: 光标闪烁
+  */
+}
+
+/* 定义打字机关键帧：从 0 字到完整字符数 */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 11.5em; /* 根据文字字符数调整宽度，这里是示例。*/
+  }
+}
+
+/* 定义光标闪烁动画 */
+@keyframes blink {
+  from { border-right-color: #333; }
+  to { border-right-color: transparent; }
+}
+

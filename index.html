@@ -1,99 +1,431 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>landing page</title>
- 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workbook 2B</title>
+  <link rel="stylesheet" href="./css/style.css">
   <style>
-    /* set style for html and body */
-    html, body {
-      margin: 0; 
-      padding: 0; 
-      height: 200vh; /*have more scroll space*/
-      overflow-x: hidden; /* cannot scroll horizontally */
-      transition: opacity 0.5s ease-out; /* set the opacity */
+    /* 新增 Home 按钮的样式 */
+    #goHomeButton {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1100;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #000000;
+      /* font-family: "Pacifico", cursive; */
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
     }
- 
-    body.fade-out {
-      opacity: 0; 
-    }
-
-    /* hole style */
-    .hole {
-      position: fixed; 
-      top: 0;
-      left: 0;
-      width: 100%; 
-      height: 100%; 
-      background: #ff99aa; 
-      /* start as a small circle */
-      clip-path: circle(50px at 50% 50%);
-      /* set clippath  */
-      transition: clip-path 0.2s ease-out;
-      /* set animation */
-      z-index: 1000; 
-      pointer-events: none; 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden; 
-    }
-
-    /* set text style */
-    .circle-text {
-      color: #fff; 
-      font-size: 12px; 
-      transition: opacity 0.2s ease-out, font-size 0.2s ease-out;
-      white-space: nowrap; /* no line change */
-    }
+    /* 原有代码中可能已有的其他样式... */
   </style>
 </head>
-
 <body>
-  <!-- the circle and text inside the circle -->
-  <div class="hole">
-    <!-- circle-text -->
-    <div class="circle-text">Scroll Up</div>
-  </div>
+  <!-- 新增 Home 按钮：点击跳转到上一级目录的 index.html -->
+  <button id="goHomeButton">Home</button>
+  
+  <section class="intro">
+    <!-- SVG 区域：使用 viewBox 0~100 坐标，便于布局 -->
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" id="mySvg">
+      <!-- 外层 <g> 做坐标变换：让主线从左下到右上 -->
+      <g id="mainGroup" transform="translate(50,50) rotate(-45) scale(1.4142) translate(-50,-50)">
+        <!-- 主线：从 (0,50) 到 (100,50) -->
+        <line id="lineMain" x1="0" y1="50" x2="100" y2="50" />
+  
+        <!-- ================= A~O 共 15 组分支线段 ================= -->
+        <!-- A组 (x=10) -->
+        <line id="A1" x1="10" y1="50" x2="10" y2="65" />
+        <line id="A2" x1="10" y1="65" x2="0"  y2="65"  />
+        <line id="A3" x1="0"  y1="65" x2="0"  y2="80"  />
+        <line id="A4" x1="0"  y1="80" x2="15" y2="80"  />
+        <line id="A5" x1="15" y1="80" x2="15" y2="95"  />
+        <line id="A6" x1="15" y1="95" x2="0"  y2="95"  />
+        <!-- B组 (x=30) -->
+        <line id="B1" x1="30" y1="50" x2="30" y2="35" />
+        <line id="B2" x1="30" y1="35" x2="45" y2="35" />
+        <line id="B3" x1="45" y1="35" x2="45" y2="20" />
+        <line id="B4" x1="45" y1="20" x2="60" y2="20" />
+        <line id="B5" x1="60" y1="20" x2="60" y2="5"  />
+        <line id="B6" x1="60" y1="5"  x2="75" y2="5"  />
+        <!-- C组 (x=50) -->
+        <line id="C1" x1="50" y1="50" x2="50" y2="65" />
+        <line id="C2" x1="50" y1="65" x2="65" y2="65" />
+        <line id="C3" x1="65" y1="65" x2="65" y2="55" />
+        <line id="C4" x1="65" y1="55" x2="80" y2="55" />
+        <line id="C5" x1="80" y1="55" x2="80" y2="70" />
+        <line id="C6" x1="80" y1="70" x2="95" y2="70" />
+        <!-- D组 (x=70) -->
+        <line id="D1" x1="70" y1="50" x2="70" y2="35" />
+        <line id="D2" x1="70" y1="35" x2="55" y2="35" />
+        <line id="D3" x1="55" y1="35" x2="55" y2="20" />
+        <line id="D4" x1="55" y1="20" x2="40" y2="20" />
+        <line id="D5" x1="40" y1="20" x2="40" y2="5"  />
+        <line id="D6" x1="40" y1="5"  x2="25" y2="5"  />
+        <!-- E组 (x=5) -->
+        <line id="E1" x1="5"  y1="50" x2="5"  y2="60" />
+        <line id="E2" x1="5"  y1="60" x2="15" y2="60" />
+        <line id="E3" x1="15" y1="60" x2="15" y2="50" />
+        <line id="E4" x1="15" y1="50" x2="25" y2="50" />
+        <line id="E5" x1="25" y1="50" x2="25" y2="40" />
+        <line id="E6" x1="25" y1="40" x2="15" y2="40" />
+        <line id="E7" x1="15" y1="40" x2="15" y2="30" />
+        <line id="E8" x1="15" y1="30" x2="5"  y2="30" />
+        <!-- F组 (x=85) -->
+        <line id="F1" x1="85" y1="50" x2="85" y2="40" />
+        <line id="F2" x1="85" y1="40" x2="95" y2="40" />
+        <line id="F3" x1="95" y1="40" x2="95" y2="30" />
+        <line id="F4" x1="95" y1="30" x2="90" y2="30" />
+        <line id="F5" x1="90" y1="30" x2="90" y2="20" />
+        <line id="F6" x1="90" y1="20" x2="100" y2="20"/>
+        <line id="F7" x1="100" y1="20" x2="100" y2="10"/>
+        <!-- G组 (x=40) -->
+        <line id="G1" x1="40" y1="50" x2="40" y2="60" />
+        <line id="G2" x1="40" y1="60" x2="30" y2="60" />
+        <line id="G3" x1="30" y1="60" x2="30" y2="70" />
+        <line id="G4" x1="30" y1="70" x2="20" y2="70" />
+        <line id="G5" x1="20" y1="70" x2="20" y2="80" />
+        <line id="G6" x1="20" y1="80" x2="10" y2="80" />
+        <line id="G7" x1="10" y1="80" x2="10" y2="90" />
+        <line id="G8" x1="10" y1="90" x2="0"  y2="90"  />
+        <!-- H组 (x=95) -->
+        <line id="H1" x1="95" y1="50" x2="95" y2="40" />
+        <line id="H2" x1="95" y1="40" x2="105" y2="40" />
+        <line id="H3" x1="105" y1="40" x2="105" y2="30" />
+        <line id="H4" x1="105" y1="30" x2="115" y2="30" />
+        <line id="H5" x1="115" y1="30" x2="115" y2="20" />
+        <line id="H6" x1="115" y1="20" x2="125" y2="20" />
+        <line id="H7" x1="125" y1="20" x2="125" y2="10" />
+        <line id="H8" x1="125" y1="10" x2="135" y2="10" />
+        <!-- I组 (x=12) -->
+        <line id="I1" x1="12" y1="50" x2="12" y2="60" />
+        <line id="I2" x1="12" y1="60" x2="2"  y2="60"  />
+        <line id="I3" x1="2"  y1="60" x2="2"  y2="70"  />
+        <line id="I4" x1="2"  y1="70" x2="17" y2="70"  />
+        <line id="I5" x1="17" y1="70" x2="17" y2="80"  />
+        <line id="I6" x1="17" y1="80" x2="0"  y2="80"  />
+        <line id="I7" x1="0"  y1="80" x2="0"  y2="90"  />
+        <line id="I8" x1="0"  y1="90" x2="15" y2="90"  />
+        <!-- J组 (x=28) -->
+        <line id="J1" x1="28" y1="50" x2="28" y2="40" />
+        <line id="J2" x1="28" y1="40" x2="15" y2="40" />
+        <line id="J3" x1="15" y1="40" x2="15" y2="30" />
+        <line id="J4" x1="15" y1="30" x2="25" y2="30" />
+        <line id="J5" x1="25" y1="30" x2="25" y2="20" />
+        <line id="J6" x1="25" y1="20" x2="5"  y2="20" />
+        <line id="J7" x1="5"  y1="20" x2="5"  y2="10" />
+        <line id="J8" x1="5"  y1="10" x2="0"  y2="10" />
+        <!-- K组 (x=58) -->
+        <line id="K1" x1="58" y1="50" x2="58" y2="60" />
+        <line id="K2" x1="58" y1="60" x2="68" y2="60" />
+        <line id="K3" x1="68" y1="60" x2="68" y2="70" />
+        <line id="K4" x1="68" y1="70" x2="80" y2="70" />
+        <line id="K5" x1="80" y1="70" x2="80" y2="80" />
+        <line id="K6" x1="80" y1="80" x2="95" y2="80" />
+        <line id="K7" x1="95" y1="80" x2="95" y2="90" />
+        <line id="K8" x1="95" y1="90" x2="105" y2="90" />
+        <!-- L组 (x=78) -->
+        <line id="L1" x1="78" y1="50" x2="78" y2="40" />
+        <line id="L2" x1="78" y1="40" x2="90" y2="40" />
+        <line id="L3" x1="90" y1="40" x2="90" y2="30" />
+        <line id="L4" x1="90" y1="30" x2="100" y2="30"/>
+        <line id="L5" x1="100" y1="30" x2="100" y2="20"/>
+        <line id="L6" x1="100" y1="20" x2="110" y2="20"/>
+        <line id="L7" x1="110" y1="20" x2="110" y2="10"/>
+        <line id="L8" x1="110" y1="10" x2="120" y2="10"/>
+        <!-- M组 (x=2) -->
+        <line id="M1" x1="2"   y1="50" x2="2"   y2="40" />
+        <line id="M2" x1="2"   y1="40" x2="0"   y2="40" />
+        <line id="M3" x1="0"   y1="40" x2="0"   y2="30" />
+        <line id="M4" x1="0"   y1="30" x2="10"  y2="30" />
+        <line id="M5" x1="10"  y1="30" x2="10"  y2="20" />
+        <line id="M6" x1="10"  y1="20" x2="0"   y2="20" />
+        <line id="M7" x1="0"   y1="20" x2="0"   y2="10" />
+        <line id="M8" x1="0"   y1="10" x2="15"  y2="10" />
+        <!-- N组 (x=92) -->
+        <line id="N1" x1="92"  y1="50" x2="92"  y2="60" />
+        <line id="N2" x1="92"  y1="60" x2="100" y2="60" />
+        <line id="N3" x1="100" y1="60" x2="100" y2="70" />
+        <line id="N4" x1="100" y1="70" x2="110" y2="70" />
+        <line id="N5" x1="110" y1="70" x2="110" y2="80" />
+        <line id="N6" x1="110" y1="80" x2="120" y2="80" />
+        <line id="N7" x1="120" y1="80" x2="120" y2="90" />
+        <line id="N8" x1="120" y1="90" x2="130" y2="90" />
+        <!-- O组 (x=35) -->
+        <line id="O1" x1="35" y1="50" x2="35" y2="60" />
+        <line id="O2" x1="35" y1="60" x2="25" y2="60" />
+        <line id="O3" x1="25" y1="60" x2="25" y2="70" />
+        <line id="O4" x1="25" y1="70" x2="35" y2="70" />
+        <line id="O5" x1="35" y1="70" x2="35" y2="80" />
+        <line id="O6" x1="35" y1="80" x2="20" y2="80" />
+        <line id="O7" x1="20" y1="80" x2="20" y2="90" />
+        <line id="O8" x1="20" y1="90" x2="30" y2="90" />
+      </g>
+    </svg>
 
-  <script>
-    // Listen for scroll events
-    window.addEventListener('scroll', function() {
-      const maxScroll = 300; 
-      const scrollTop = window.scrollY; // Get the current vertical scroll position
-      const minRadius = 50; 
-      
-      // Calculate the maximum radius needed to cover the screen 
-      // (using the Pythagorean theorem to compute the screen's diagonal length)
-      const maxRadius = Math.hypot(window.innerWidth, window.innerHeight);
-      
-      // Calculate the current circle's radius based on the scroll ratio
-      // As the scroll reaches the threshold, the circle's radius increases from minRadius to maxRadius
-      const radius = minRadius + (maxRadius - minRadius) * Math.min(scrollTop / maxScroll, 1);
-      
-      // Set the clip-path of the .hole element to form a circle centered in the viewport with a dynamically changing radius
-      document.querySelector('.hole').style.clipPath = `circle(${radius}px at 50% 50%)`;
-
-      // Adjust the text's opacity based on the scroll ratio; the more you scroll, the lower the opacity
-      const textOpacity = 1 - Math.min(scrollTop / maxScroll, 1);
-      const textEl = document.querySelector('.circle-text');
-      textEl.style.opacity = textOpacity;
-      
-      // Set the text size relative to the circle's radius (adjust the ratio as needed)
-      textEl.style.fontSize = (radius * 0.35) + 'px';
-
-      // When the scroll distance reaches or exceeds the threshold, trigger a fade-out animation and then redirect to main.html
-      if (scrollTop >= maxScroll) {
-        // Add the fade-out class
-        document.body.classList.add('fade-out');
-        // Wait 500 milliseconds for the fade-out animation to complete before redirecting
-        setTimeout(() => {
-          window.location.href = "main.html";
-        }, 500);
+    <h1></h1>
+  
+    <script>
+      // 主线动画时长(秒)
+      const mainDuration = 2;
+      // 每条分支线段的动画时长(秒)
+      const subDuration = 1;
+  
+      window.onload = function() {
+        // 1. 初始化主线
+        const mainLine = document.getElementById("lineMain");
+        initLine(mainLine);
+        mainLine.style.animation = `drawMain ${mainDuration}s linear forwards`;
+  
+        // 2. 为A~O组各线段设置动画延迟
+        setGroupDelay("A", (10/100)*mainDuration, 6);
+        setGroupDelay("B", (30/100)*mainDuration, 6);
+        setGroupDelay("C", (50/100)*mainDuration, 6);
+        setGroupDelay("D", (70/100)*mainDuration, 6);
+        setGroupDelay("E", (5 /100)*mainDuration,  8);
+        setGroupDelay("F", (85/100)*mainDuration, 7);
+        setGroupDelay("G", (40/100)*mainDuration, 8);
+        setGroupDelay("H", (95/100)*mainDuration, 8);
+        setGroupDelay("I", (12/100)*mainDuration, 8);
+        setGroupDelay("J", (28/100)*mainDuration, 8);
+        setGroupDelay("K", (58/100)*mainDuration, 8);
+        setGroupDelay("L", (78/100)*mainDuration, 8);
+        setGroupDelay("M", (2 /100)*mainDuration,  8);
+        setGroupDelay("N", (92/100)*mainDuration, 8);
+        setGroupDelay("O", (35/100)*mainDuration, 8);
+  
+        // 3. 在 mainGroup 中随机生成一些灰度矩形
+        const mainGroup = document.getElementById("mainGroup");
+        createRandomGrayRectangles(mainGroup, 15); // 例如随机插入15个矩形
       }
+  
+      // 初始化单条线段(设置 dasharray/dashoffset 供描线动画)
+      function initLine(el) {
+        let length = 100;
+        try {
+          length = el.getTotalLength();
+        } catch(e) {}
+        el.style.strokeDasharray = length;
+        el.style.strokeDashoffset = length;
+      }
+  
+      // 设置某组线段的动画延迟
+      // prefix: 组名("A","B","C"...)
+      // baseDelay: 基础延迟(秒) => (startX/100)*mainDuration
+      // count: 组内线段数量
+      function setGroupDelay(prefix, baseDelay, count) {
+        for(let i=1; i<=count; i++){
+          const lineId = prefix + i;
+          const lineEl = document.getElementById(lineId);
+          if(!lineEl) continue;
+          initLine(lineEl);
+  
+          // 动画延迟 = baseDelay + (i-1)*subDuration
+          const delaySec = baseDelay + (i-1)*subDuration;
+          lineEl.style.animationDelay = delaySec + "s";
+          lineEl.style.animationDuration = subDuration + "s";
+          lineEl.style.animationName = "drawSub";
+        }
+      }
+  
+      // 随机生成指定数量的“灰度”矩形，并让其淡入出现
+      function createRandomGrayRectangles(parentGroup, count) {
+        const svgns = "http://www.w3.org/2000/svg";
+        for(let i=0; i<count; i++){
+          // 随机坐标(0~80)，大小(5~20)
+          const x = Math.random() * 80;
+          const y = Math.random() * 80;
+          const w = 5 + Math.random() * 15;
+          const h = 5 + Math.random() * 15;
+  
+          // 随机灰度(0~255)，可加透明度
+          const grayVal = Math.floor(Math.random()*256);
+          // 0.4 表示40%透明度
+          const fillColor = `rgba(${grayVal},${grayVal},${grayVal},0.4)`;
+  
+          // 创建 rect
+          const rectEl = document.createElementNS(svgns, "rect");
+          rectEl.setAttribute("x", x);
+          rectEl.setAttribute("y", y);
+          rectEl.setAttribute("width", w);
+          rectEl.setAttribute("height", h);
+          rectEl.setAttribute("fill", fillColor);
+          rectEl.setAttribute("opacity", 0); // 初始不可见
+  
+          // 让矩形淡入 => fadeInRect 动画
+          rectEl.style.animationName = "fadeInRect";
+          rectEl.style.animationDuration = "1s";  
+          rectEl.style.animationFillMode = "forwards";
+  
+          // 为了让它和线段类似“先后”出现，可设置动画延迟
+          // 这里简单示例：让它在 1 秒后依次出现
+          const delaySec = 1 + i * 0.2; // 第1个延迟1s, 第2个1.4s, ...
+          rectEl.style.animationDelay = delaySec + "s";
+  
+          // 加到 <g> 容器
+          parentGroup.appendChild(rectEl);
+        }
+      }
+    </script>
+    <div class="welcome-overlay">
+      <h2 class="typewriter">Welcome to my website</h2>
+    </div>
+  </section>
+  <section class="awards">
+    <p>My Work - Try moving the mouse up and down on the list and hover to see the project name -</p>
+    <div class="awards-list"></div>
+  </section>
+  <section class="outro">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" id="mySvg">
+      <!-- 外层 <g> 做坐标变换：让主线从左下到右上 -->
+      <g id="mainGroup" transform="translate(50,50) rotate(-45) scale(1.4142) translate(-50,-50)">
+        <!-- 主线：从 (0,50) 到 (100,50) -->
+        <line id="lineMain" x1="0" y1="50" x2="100" y2="50" />
+  
+        <!-- ================= A~O 共 15 组分支线段 ================= -->
+        <!-- A组 (x=10) -->
+        <line id="A1" x1="10" y1="50" x2="10" y2="65" />
+        <line id="A2" x1="10" y1="65" x2="0"  y2="65"  />
+        <line id="A3" x1="0"  y1="65" x2="0"  y2="80"  />
+        <line id="A4" x1="0"  y1="80" x2="15" y2="80"  />
+        <line id="A5" x1="15" y1="80" x2="15" y2="95"  />
+        <line id="A6" x1="15" y1="95" x2="0"  y2="95"  />
+        <!-- B组 (x=30) -->
+        <line id="B1" x1="30" y1="50" x2="30" y2="35" />
+        <line id="B2" x1="30" y1="35" x2="45" y2="35" />
+        <line id="B3" x1="45" y1="35" x2="45" y2="20" />
+        <line id="B4" x1="45" y1="20" x2="60" y2="20" />
+        <line id="B5" x1="60" y1="20" x2="60" y2="5"  />
+        <line id="B6" x1="60" y1="5"  x2="75" y2="5"  />
+        <!-- C组 (x=50) -->
+        <line id="C1" x1="50" y1="50" x2="50" y2="65" />
+        <line id="C2" x1="50" y1="65" x2="65" y2="65" />
+        <line id="C3" x1="65" y1="65" x2="65" y2="55" />
+        <line id="C4" x1="65" y1="55" x2="80" y2="55" />
+        <line id="C5" x1="80" y1="55" x2="80" y2="70" />
+        <line id="C6" x1="80" y1="70" x2="95" y2="70" />
+        <!-- D组 (x=70) -->
+        <line id="D1" x1="70" y1="50" x2="70" y2="35" />
+        <line id="D2" x1="70" y1="35" x2="55" y2="35" />
+        <line id="D3" x1="55" y1="35" x2="55" y2="20" />
+        <line id="D4" x1="55" y1="20" x2="40" y2="20" />
+        <line id="D5" x1="40" y1="20" x2="40" y2="5"  />
+        <line id="D6" x1="40" y1="5"  x2="25" y2="5"  />
+        <!-- E组 (x=5) -->
+        <line id="E1" x1="5"  y1="50" x2="5"  y2="60" />
+        <line id="E2" x1="5"  y1="60" x2="15" y2="60" />
+        <line id="E3" x1="15" y1="60" x2="15" y2="50" />
+        <line id="E4" x1="15" y1="50" x2="25" y2="50" />
+        <line id="E5" x1="25" y1="50" x2="25" y2="40" />
+        <line id="E6" x1="25" y1="40" x2="15" y2="40" />
+        <line id="E7" x1="15" y1="40" x2="15" y2="30" />
+        <line id="E8" x1="15" y1="30" x2="5"  y2="30" />
+        <!-- F组 (x=85) -->
+        <line id="F1" x1="85" y1="50" x2="85" y2="40" />
+        <line id="F2" x1="85" y1="40" x2="95" y2="40" />
+        <line id="F3" x1="95" y1="40" x2="95" y2="30" />
+        <line id="F4" x1="95" y1="30" x2="90" y2="30" />
+        <line id="F5" x1="90" y1="30" x2="90" y2="20" />
+        <line id="F6" x1="90" y1="20" x2="100" y2="20"/>
+        <line id="F7" x1="100" y1="20" x2="100" y2="10"/>
+        <!-- G组 (x=40) -->
+        <line id="G1" x1="40" y1="50" x2="40" y2="60" />
+        <line id="G2" x1="40" y1="60" x2="30" y2="60" />
+        <line id="G3" x1="30" y1="60" x2="30" y2="70" />
+        <line id="G4" x1="30" y1="70" x2="20" y2="70" />
+        <line id="G5" x1="20" y1="70" x2="20" y2="80" />
+        <line id="G6" x1="20" y1="80" x2="10" y2="80" />
+        <line id="G7" x1="10" y1="80" x2="10" y2="90" />
+        <line id="G8" x1="10" y1="90" x2="0"  y2="90"  />
+        <!-- H组 (x=95) -->
+        <line id="H1" x1="95" y1="50" x2="95" y2="40" />
+        <line id="H2" x1="95" y1="40" x2="105" y2="40" />
+        <line id="H3" x1="105" y1="40" x2="105" y2="30" />
+        <line id="H4" x1="105" y1="30" x2="115" y2="30" />
+        <line id="H5" x1="115" y1="30" x2="115" y2="20" />
+        <line id="H6" x1="115" y1="20" x2="125" y2="20" />
+        <line id="H7" x1="125" y1="20" x2="125" y2="10" />
+        <line id="H8" x1="125" y1="10" x2="135" y2="10" />
+        <!-- I组 (x=12) -->
+        <line id="I1" x1="12" y1="50" x2="12" y2="60" />
+        <line id="I2" x1="12" y1="60" x2="2"  y2="60"  />
+        <line id="I3" x1="2"  y1="60" x2="2"  y2="70"  />
+        <line id="I4" x1="2"  y1="70" x2="17" y2="70"  />
+        <line id="I5" x1="17" y1="70" x2="17" y2="80"  />
+        <line id="I6" x1="17" y1="80" x2="0"  y2="80"  />
+        <line id="I7" x1="0"  y1="80" x2="0"  y2="90"  />
+        <line id="I8" x1="0"  y1="90" x2="15" y2="90"  />
+        <!-- J组 (x=28) -->
+        <line id="J1" x1="28" y1="50" x2="28" y2="40" />
+        <line id="J2" x1="28" y1="40" x2="15" y2="40" />
+        <line id="J3" x1="15" y1="40" x2="15" y2="30" />
+        <line id="J4" x1="15" y1="30" x2="25" y2="30" />
+        <line id="J5" x1="25" y1="30" x2="25" y2="20" />
+        <line id="J6" x1="25" y1="20" x2="5"  y2="20" />
+        <line id="J7" x1="5"  y1="20" x2="5"  y2="10" />
+        <line id="J8" x1="5"  y1="10" x2="0"  y2="10" />
+        <!-- K组 (x=58) -->
+        <line id="K1" x1="58" y1="50" x2="58" y2="60" />
+        <line id="K2" x1="58" y1="60" x2="68" y2="60" />
+        <line id="K3" x1="68" y1="60" x2="68" y2="70" />
+        <line id="K4" x1="68" y1="70" x2="80" y2="70" />
+        <line id="K5" x1="80" y1="70" x2="80" y2="80" />
+        <line id="K6" x1="80" y1="80" x2="95" y2="80" />
+        <line id="K7" x1="95" y1="80" x2="95" y2="90" />
+        <line id="K8" x1="95" y1="90" x2="105" y2="90" />
+        <!-- L组 (x=78) -->
+        <line id="L1" x1="78" y1="50" x2="78" y2="40" />
+        <line id="L2" x1="78" y1="40" x2="90" y2="40" />
+        <line id="L3" x1="90" y1="40" x2="90" y2="30" />
+        <line id="L4" x1="90" y1="30" x2="100" y2="30"/>
+        <line id="L5" x1="100" y1="30" x2="100" y2="20"/>
+        <line id="L6" x1="100" y1="20" x2="110" y2="20"/>
+        <line id="L7" x1="110" y1="20" x2="110" y2="10"/>
+        <line id="L8" x1="110" y1="10" x2="120" y2="10"/>
+        <!-- M组 (x=2) -->
+        <line id="M1" x1="2"   y1="50" x2="2"   y2="40" />
+        <line id="M2" x1="2"   y1="40" x2="0"   y2="40" />
+        <line id="M3" x1="0"   y1="40" x2="0"   y2="30" />
+        <line id="M4" x1="0"   y1="30" x2="10"  y2="30" />
+        <line id="M5" x1="10"  y1="30" x2="10"  y2="20" />
+        <line id="M6" x1="10"  y1="20" x2="0"   y2="20" />
+        <line id="M7" x1="0"   y1="20" x2="0"   y2="10" />
+        <line id="M8" x1="0"   y1="10" x2="15"  y2="10" />
+        <!-- N组 (x=92) -->
+        <line id="N1" x1="92"  y1="50" x2="92"  y2="60" />
+        <line id="N2" x1="92"  y1="60" x2="100" y2="60" />
+        <line id="N3" x1="100" y1="60" x2="100" y2="70" />
+        <line id="N4" x1="100" y1="70" x2="110" y2="70" />
+        <line id="N5" x1="110" y1="70" x2="110" y2="80" />
+        <line id="N6" x1="110" y1="80" x2="120" y2="80" />
+        <line id="N7" x1="120" y1="80" x2="120" y2="90" />
+        <line id="N8" x1="120" y1="90" x2="130" y2="90" />
+        <!-- O组 (x=35) -->
+        <line id="O1" x1="35" y1="50" x2="35" y2="60" />
+        <line id="O2" x1="35" y1="60" x2="25" y2="60" />
+        <line id="O3" x1="25" y1="60" x2="25" y2="70" />
+        <line id="O4" x1="25" y1="70" x2="35" y2="70" />
+        <line id="O5" x1="35" y1="70" x2="35" y2="80" />
+        <line id="O6" x1="35" y1="80" x2="20" y2="80" />
+        <line id="O7" x1="20" y1="80" x2="20" y2="90" />
+        <line id="O8" x1="20" y1="90" x2="30" y2="90" />
+      </g>
+    </svg>
+  
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="./js/script.js" type="module"></script>
+  </section>
+  
+  <!-- 为 Home 按钮添加点击事件，跳转到上一级的 index.html -->
+  <script>
+    document.getElementById("goHomeButton").addEventListener("click", function() {
+      window.location.href = "../2A/main.html";
     });
-</script>
-
+  </script>
+  
 </body>
 </html>
