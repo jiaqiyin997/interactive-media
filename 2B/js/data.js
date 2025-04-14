@@ -86,7 +86,7 @@ export const awards = [
   {
     name: 'My progress',
     type: 'Hover',
-    project: 'Open Field Audio',
+    project: 'My website development',
     label: 'See Live',
-    link: "play5/index.html"
+    link: "progress/index.html"
   }]
