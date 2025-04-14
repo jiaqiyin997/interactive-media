@@ -37,9 +37,25 @@
       h2 {
         margin-top: 0;
       }
+      
+      /* Style for the back button */
+      .back-button {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #444;
+        border: none;
+        color: #fff;
+        border-radius: 4px;
+      }
     </style>
   </head>
   <body>
+    <!-- Back button to return to the previous page -->
+    <button class="back-button" onclick="window.history.back()">Back</button>
+
     <h2>Cam Hicks</h2>
 
     <!-- Use inline-block + vertical-align: middle for alignment -->
