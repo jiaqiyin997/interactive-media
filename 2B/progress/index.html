@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>酷的图片展示</title>
+  <!-- 引入 Google Fonts 的 Orbitron 字体 -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: "Orbitron", sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    /* Back button styling */
+    #backButton {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #fff;
+      color: #000;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: "Orbitron", sans-serif;
+      z-index: 1000;
+    }
+    /* Title for progress */
+    .progress-title {
+      text-align: center;
+      font-size: 2rem;
+      margin: 60px 0 20px; /* Adjust margin as needed */
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .gallery-item {
+      text-align: center;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .gallery-item p {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 返回上一级按钮 -->
+  <button id="backButton">Back</button>
+
+  <!-- New title "progress" above the gallery -->
+  <h2 class="progress-title">progress</h2>
+
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="../images_2/截屏2025-04-14 19.50.24.png" alt="图片1" />
+      <!-- <p>描述文字1</p> -->
+    </div>
+    <div class="gallery-item">
+      <img src="../images_2/截屏2025-04-14 19.50.28.png" alt="图片2" />
+      <p>Set three main sections first: Intro, main, outro</p>
+    </div>
+    <div class="gallery-item">
+      <img src="../images_2/截屏2025-04-14 19.50.30.png" alt="图片3" />
+      <!-- <p>描述文字3</p> -->
+    </div>
+    <div class="gallery-item">
+      <img src="../images_2/截屏2025-04-14 19.50.55.png" alt="图片4" />
+      <p>
+        Below this header is a vertically arranged list of items. Each list
+        entry features text labels (for example, "RESEARCH_1", "RESEARCH_2",
+        "WEEK_4", etc.) along with a hover indicator or button suggesting that
+        hovering over the item will reveal more details about the project.
+      </p>
+    </div>
+    <div class="gallery-item">
+      <img src="../images_2/截屏2025-04-14 19.52.21.png" alt="图片5" />
+      <p>
+        In the center, the same “Welcome to my website!” overlay is present.
+        The intro start with line animation and pattern of semi-transparent,
+        geometric gray blocks that create an abstract, layered visual effect.
+      </p>
+    </div>
+    <div class="gallery-item">
+      <img src="../images_2/截屏2025-04-14 20.06.52.png" alt="图片6" />
+      <p>
+        The overall page of outro has a dark (almost black) background.
+        Superimposed on this background is a pattern of semi-transparent,
+        geometric gray blocks that create an abstract, layered visual effect.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // 当点击返回按钮时，跳转到上一级的 index.html
+    document.getElementById("backButton").addEventListener("click", function() {
+      window.location.href = "../index.html";
+    });
+  </script>
+</body>
+</html>

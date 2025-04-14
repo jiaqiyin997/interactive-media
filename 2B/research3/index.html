@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Text and iframe Alignment Example</title>
+    <!-- Import a cool font from Google Fonts (e.g. Orbitron) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Set black background, white text, and use the cool font */
+      body {
+        background-color: #000;
+        color: #fff;
+        font-family: "Orbitron", sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+
+      /* Set both iframe and text block to inline-block and use vertical-align for alignment */
+      iframe,
+      .description {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      /* Limit text block width to avoid overly long lines, adjust as needed */
+      .description {
+        margin-left: 10px; /* Spacing between text and iframe */
+      }
+
+      /* Heading styling for a bit more flair, optional */
+      h2 {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Cam Hicks</h2>
+
+    <!-- Use inline-block + vertical-align: middle for alignment -->
+    <iframe
+      src="https://www.cam-hicks.com/"
+      width="1200"
+      height="500"
+      frameborder="0"
+      allowfullscreen
+    >
+    </iframe>
+
+    <!-- Text container, displayed alongside the iframe -->
+    <p class="description">
+      By borrowing design cues from Cam Hicks’ site—such as a minimalist
+      aesthetic, strong storytelling through imagery, and thoughtful
+      typography—I can create a visually striking online presence that
+      emphasizes my work, my story, and my style.
+    </p>
+  </body>
+</html>
