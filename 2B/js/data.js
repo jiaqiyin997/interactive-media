@@ -1,4 +1,4 @@
-export const awards = [
+export const works = [
   {
     name: 'Research_1',
     type: 'Hover',
@@ -89,4 +89,5 @@ export const awards = [
     project: 'My website development',
     label: 'See Live',
     link: "progress/index.html"
-  }]
+  }
+];
