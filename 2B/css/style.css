@@ -45,34 +45,32 @@ section {
   align-items: center;
 }
 
-.awards {
+.works {
   min-height: 100vh;
   height: max-content;
 }
 
-.awards p {
+.works p {
   padding: 5px 20px;
 }
 
-.awards-list {
+.works-list {
   border-top: 1px solid #000;
 }
 
-
-
-.award {
+.work {
   height: 50px;  
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
-.award-wrapper {
+.work-wrapper {
   position: relative;
   height: 150px;   
   will-change: transform;
   transform: translateY(-100px);  
 }
 
-.award-name, .award-project {
+.work-name, .work-project {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -83,9 +81,8 @@ section {
   border-bottom: 1px solid #000;
 }
 
-
-.award-name h1,
-.award-project h1 {
+.work-name h1,
+.work-project h1 {
   font-family: 'Roboto', sans-serif; 
   font-weight: 300;                  
   font-size: 18px;                   
@@ -94,22 +91,17 @@ section {
   line-height: 1;
 }
 
-
-
-
-.award-name {
+.work-name {
   background-color: #00000027;
   color: #000000;
 }
 
-
-
-.award-project {
+.work-project {
   background-color: #20ce0c;
   color: #000000;
 }
 
-.award-preview {
+.work-preview {
   position: fixed;
   bottom: 15px;
   right: 15px;
@@ -137,6 +129,7 @@ line {
 #lineMain {
   animation: drawMain 2s linear forwards;
 }
+
 @keyframes drawMain {
   to { stroke-dashoffset: 0; }
 }
@@ -150,21 +143,16 @@ line:hover {
   stroke-width: 0.2;
 }
 
-
 @keyframes fadeInRect {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
 
-
-
 .intro {
   position: relative;    
   width: 100%;
   min-height: 100vh;     
-  
 }
-
 
 .welcome-overlay {
   position: absolute;
@@ -180,18 +168,14 @@ line:hover {
   text-align: center;
 }
 
-
 .typewriter {
   display: inline-block;   
   overflow: hidden;        
   white-space: nowrap;     
   border-right: 2px solid #333; 
-  
   animation: typing 3s steps(22, end) 1s 1 normal both,
              blink 0.75s step-end infinite alternate;
-  
 }
-
 
 @keyframes typing {
   from {
@@ -202,9 +186,7 @@ line:hover {
   }
 }
 
-
 @keyframes blink {
   from { border-right-color: #333; }
   to { border-right-color: transparent; }
 }
-
