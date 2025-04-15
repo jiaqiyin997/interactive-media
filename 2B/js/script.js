@@ -1,13 +1,13 @@
-import { works } from "./data.js";
+import { awards } from "./data.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const lenis = new Lenis({
     autoRaf: true,
   });
 
-  const worksListContainer = document.querySelector(".works-list");
-  const workPreview = document.querySelector(".work-preview");
-  const worksList = document.querySelector(".works-list");
+  const awardsListContainer = document.querySelector(".awards-list");
+  const awardPreview = document.querySelector(".award-preview");
+  const awardsList = document.querySelector(".awards-list");
 
   // const POSITIONS = {
   //   BOTTOM: 0,
@@ -16,213 +16,221 @@ document.addEventListener("DOMContentLoaded", () => {
   // };
 
   const POSITIONS = {
-    BOTTOM: 0,     
-    MIDDLE: -50,   
-    TOP: -100      
-  };
+    BOTTOM: 0,     // 显示第一部分
+    MIDDLE: -50,   // 显示中间（奖项项目部分）
+    TOP: -100      // 显示第三部分（复制的 award-name）
+  }
   
+
   let lastMousePosition = { x: 0, y: 0 };
-  let activeWork = null;
+  let activeAward = null;
   let ticking = false;
   let mouseTimeout = null;
   let isMouseMoving = false;
 
-  works.forEach((work) => {
-    const workElement = document.createElement("div");
-    workElement.className = "work";
+  awards.forEach((award) => {
+    const awardElement = document.createElement("div");
+    awardElement.className = "award";
 
-    workElement.innerHTML = `
-      <div class='work-wrapper'>
-        <div class='work-name'>
-          <h1>${work.name}</h1>
-          <h1>${work.type}</h1>
+    awardElement.innerHTML = `
+      <div class='award-wrapper'>
+        <div class='award-name'>
+          <h1>${award.name}</h1>
+          <h1>${award.type}</h1>
         </div>
-        <div class="work-project">
-          <h1>${work.project}</h1>
-          <h1>${work.label}</h1>
+        <div class="award-project">
+          <h1>${award.project}</h1>
+          <h1>${award.label}</h1>
         </div>
-        <div class='work-name'>
-          <h1>${work.name}</h1>
-          <h1>${work.type}</h1>
+        <div class='award-name'>
+          <h1>${award.name}</h1>
+          <h1>${award.type}</h1>
         </div>
       </div>
     `;
 
-    workElement.addEventListener("click", () => {    
-      window.location.href = work.link; 
-      worksListContainer.appendChild(workElement);
-    });
+    // 绑定点击事件，根据需要选择同页跳转或者新标签页打开
+  awardElement.addEventListener("click", () => {
+    // 1) 在同一个标签页中跳转
+    window.location.href = award.link; 
 
-    const worksElements = document.querySelectorAll(".work");
+    // 或者
+    // 2) 在新标签页中打开
+    // window.open(award.link, "_blank");
+  });
 
-    const animatePreview = () => {
-      const worksListRect = worksList.getBoundingClientRect();
-      if (
-        lastMousePosition.x < worksListRect.left ||
-        lastMousePosition.x > worksListRect.right ||
-        lastMousePosition.y < worksListRect.top ||
-        lastMousePosition.y > worksListRect.bottom
-      ) {
-        const previewImages = workPreview.querySelectorAll("img");
-        previewImages.forEach((img) => {
-          gsap.to(img, {
-            scale: 0,
-            duration: 0.4,
-            ease: "power2.out",
-            onComplete: () => img.remove(),
-          });
+    awardsListContainer.appendChild(awardElement);
+  });
+
+  const awardsElements = document.querySelectorAll(".award");
+
+  const animatePreview = () => {
+    const awardsListRect = awardsList.getBoundingClientRect();
+    if (
+      lastMousePosition.x < awardsListRect.left ||
+      lastMousePosition.x > awardsListRect.right ||
+      lastMousePosition.y < awardsListRect.top ||
+      lastMousePosition.y > awardsListRect.bottom
+    ) {
+      const previewImages = awardPreview.querySelectorAll("img");
+      previewImages.forEach((img) => {
+        gsap.to(img, {
+          scale: 0,
+          duration: 0.4,
+          ease: "power2.out",
+          onComplete: () => img.remove(),
         });
-      }
-    };
-
-    const updateWorks = () => {
-      animatePreview();
-
-      if (activeWork) {
-        const rect = activeWork.getBoundingClientRect();
-        const isStillOver =
-          lastMousePosition.x >= rect.left &&
-          lastMousePosition.x <= rect.right &&
-          lastMousePosition.y >= rect.top &&
-          lastMousePosition.y <= rect.bottom;
-
-        if (!isStillOver) {
-          const wrapper = activeWork.querySelector(".work-wrapper");
-          const leavingFromTop = lastMousePosition.y < rect.top + rect.height / 2;
-
-          gsap.to(wrapper, {
-            y: leavingFromTop ? POSITIONS.TOP : POSITIONS.BOTTOM,
-            duration: 0.4,
-            ease: "power2.out",
-          });
-          activeWork = null;
-        }
-      }
-
-      worksElements.forEach((work, index) => {
-        if (work === activeWork) return;
-
-        const rect = work.getBoundingClientRect();
-        const isMouseOver =
-          lastMousePosition.x >= rect.left &&
-          lastMousePosition.x <= rect.right &&
-          lastMousePosition.y >= rect.top &&
-          lastMousePosition.y <= rect.bottom;
-
-        if (isMouseOver) {
-          const wrapper = work.querySelector(".work-wrapper");
-          const enterFromTop = lastMousePosition.y < rect.top + rect.height / 2;
-
-          gsap.to(wrapper, {
-            y: POSITIONS.MIDDLE,
-            duration: 0.4,
-            ease: "power2.out",
-          });
-          activeWork = work;
-        }
       });
+    }
+  };
 
-      ticking = false;
-    };
+  const updateAwards = () => {
+    animatePreview();
 
-    document.addEventListener("mousemove", (e) => {
-      lastMousePosition.x = e.clientX;
-      lastMousePosition.y = e.clientY;
+    if (activeAward) {
+      const rect = activeAward.getBoundingClientRect();
+      const isStillOver =
+        lastMousePosition.x >= rect.left &&
+        lastMousePosition.x <= rect.right &&
+        lastMousePosition.y >= rect.top &&
+        lastMousePosition.y <= rect.bottom;
 
-      isMouseMoving = true;
-      if (mouseTimeout) {
-        clearTimeout(mouseTimeout);
+      if (!isStillOver) {
+        const wrapper = activeAward.querySelector(".award-wrapper");
+        const leavingFronTop = lastMousePosition.y < rect.top + rect.height / 2;
+
+        gsap.to(wrapper, {
+          y: leavingFronTop ? POSITIONS.TOP : POSITIONS.BOTTOM,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+        activeAward = null;
       }
+    }
 
-      const worksListRect = worksList.getBoundingClientRect();
-      const isInsideWorksList =
-        lastMousePosition.x >= worksListRect.left &&
-        lastMousePosition.x <= worksListRect.right &&
-        lastMousePosition.y >= worksListRect.top &&
-        lastMousePosition.y <= worksListRect.bottom;
+    awardsElements.forEach((award, index) => {
+      if (award === activeAward) return;
 
-      if (isInsideWorksList) {
-        mouseTimeout = setTimeout(() => {
-          isMouseMoving = false;
-          const images = workPreview.querySelectorAll("img");
-          if (images.length > 1) {
-            const lastImage = images[images.length - 1];
-            images.forEach((img) => {
-              if (img !== lastImage) {
-                gsap.to(img, {
-                  scale: 0,
-                  duration: 0.4,
-                  ease: "power2.out",
-                  onComplete: () => img.remove(),
-                });
-              }
-            });
-          }
-        }, 2000);
-      }
+      const rect = award.getBoundingClientRect();
+      const isMouseOver =
+        lastMousePosition.x >= rect.left &&
+        lastMousePosition.x <= rect.right &&
+        lastMousePosition.y >= rect.top &&
+        lastMousePosition.y <= rect.bottom;
 
-      animatePreview();
-    });
-
-    document.addEventListener(
-      "scroll",
-      () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            updateWorks();
-          });
-          ticking = true;
-        }
-      },
-      { passive: true }
-    );
-
-    worksElements.forEach((work, index) => {
-      const wrapper = work.querySelector(".work-wrapper");
-      let currentPosition = POSITIONS.TOP;
-
-      work.addEventListener("mouseenter", (e) => {
-        activeWork = work;
-        const rect = work.getBoundingClientRect();
+      if (isMouseOver) {
+        const wrapper = award.querySelector(".award-wrapper");
         const enterFromTop = lastMousePosition.y < rect.top + rect.height / 2;
 
-        if (enterFromTop || currentPosition === POSITIONS.BOTTOM) {
-          currentPosition = POSITIONS.MIDDLE;
-          gsap.to(wrapper, {
-            y: POSITIONS.MIDDLE,
-            duration: 0.4,
-            ease: "power2.out",
+        gsap.to(wrapper, {
+          y: POSITIONS.MIDDLE,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+        activeAward = award;
+      }
+    });
+
+    ticking = false;
+  };
+
+  document.addEventListener("mousemove", (e) => {
+    lastMousePosition.x = e.clientX;
+    lastMousePosition.y = e.clientY;
+
+    isMouseMoving = true;
+    if (mouseTimeout) {
+      clearTimeout(mouseTimeout);
+    }
+
+    const awardsListRect = awardsList.getBoundingClientRect();
+    const isInsideAwardsList =
+      lastMousePosition.x >= awardsListRect.left &&
+      lastMousePosition.x <= awardsListRect.right &&
+      lastMousePosition.y >= awardsListRect.top &&
+      lastMousePosition.y <= awardsListRect.bottom;
+
+    if (isInsideAwardsList) {
+      mouseTimeout = setTimeout(() => {
+        isMouseMoving = false;
+        const images = awardPreview.querySelectorAll("img");
+        if (images.length > 1) {
+          const lastImage = images[images.length - 1];
+          images.forEach((img) => {
+            if (img !== lastImage) {
+              gsap.to(img, {
+                scale: 0,
+                duration: 0.4,
+                ease: "power2.out",
+                onComplete: () => img.remove(),
+              });
+            }
           });
         }
+      }, 2000);
+    }
 
-        const img = document.createElement("img");
-        img.src = `./images/img${index + 1}.jpg`;
-        img.style.position = "absolute";
-        img.style.top = "0";
-        img.style.left = "0";
-        img.style.scale = 0;
-        img.style.zIndex = Date.now();
+    animatePreview();
+  });
 
-        workPreview.appendChild(img);
-
-        gsap.to(img, {
-          scale: 1,
-          duration: 0.4,
-          ease: "power2.out",
+  document.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateAwards();
         });
-      });
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
 
-      work.addEventListener("mouseleave", (e) => {
-        activeWork = null;
-        const rect = work.getBoundingClientRect();
-        const leavingFromTop = e.clientY < rect.top + rect.height / 2;
+  awardsElements.forEach((award, index) => {
+    const wrapper = award.querySelector(".award-wrapper");
+    let currentPosition = POSITIONS.TOP;
 
-        currentPosition = leavingFromTop ? POSITIONS.TOP : POSITIONS.BOTTOM;
+    award.addEventListener("mouseenter", (e) => {
+      activeAward = award;
+      const rect = award.getBoundingClientRect();
+      const enterFromTop = lastMousePosition.y < rect.top + rect.height / 2;
+
+      if (enterFromTop || currentPosition === POSITIONS.BOTTOM) {
+        currentPosition = POSITIONS.MIDDLE;
         gsap.to(wrapper, {
-          y: currentPosition,
+          y: POSITIONS.MIDDLE,
           duration: 0.4,
           ease: "power2.out",
         });
+      }
+
+      const img = document.createElement("img");
+      img.src = `./images/img${index + 1}.jpg`;
+      img.style.position = "absolute";
+      img.style.top = "0";
+      img.style.left = "0";
+      img.style.scale = 0;
+      img.style.zIndex = Date.now();
+
+      awardPreview.appendChild(img);
+
+      gsap.to(img, {
+        scale: 1,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+    });
+
+    award.addEventListener("mouseleave", (e) => {
+      activeAward = null;
+      const rect = award.getBoundingClientRect();
+      const leavingFromTop = e.clientY < rect.top + rect.height / 2;
+
+      currentPosition = leavingFromTop ? POSITIONS.TOP : POSITIONS.BOTTOM;
+      gsap.to(wrapper, {
+        y: currentPosition,
+        duration: 0.4,
+        ease: "power2.out",
       });
     });
   });
