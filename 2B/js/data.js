@@ -62,13 +62,13 @@ export const awards = [
     label: 'See Live',
     link: "play2/landing.html"
   },
-  {
-    name: 'play_3',
-    type: 'Hover',
-    project: 'Glitch Mosaic',
-    label: 'See Live',
-    link: "play3/landing.html"
-  },
+  // {
+  //   name: 'play_3',
+  //   type: 'Hover',
+  //   project: 'Glitch Mosaic',
+  //   label: 'See Live',
+  //   link: "play3/landing.html"
+  // },
   {
     name: 'play_4',
     type: 'Hover',
