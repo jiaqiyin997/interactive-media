@@ -1,3 +1,6 @@
+// Chatgpt was used in the building of this p5 sketch. I made refinements and adjusted the code where necessary.
+
+// In the instance of AI writing entire code blocks which I did not modify, I sought to understand the process behind them.
 function setup() {
   // Create a 3D canvas
   createCanvas(windowWidth, windowHeight, WEBGL);
