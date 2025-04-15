@@ -58,28 +58,7 @@ section {
   border-top: 1px solid #000;
 }
 
-/* .award {
-  height: 80px;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-}
 
-.award-wrapper {
-  position: relative;
-  height: 240px;
-  will-change: transform;
-  transform: translateY(-160px);
-}
-
-.award-name, .award-project {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 80px;
-  padding: 5px 15px;
-  cursor: pointer;
-  border-bottom: 1px solid #000;
-} */
 
 .award {
   height: 50px;  /* 修改为 50px */
@@ -104,12 +83,12 @@ section {
   border-bottom: 1px solid #000;
 }
 
-/* 针对奖项区域的标题调整字体 */
+
 .award-name h1,
 .award-project h1 {
-  font-family: 'Roboto', sans-serif; /* 使用 Roboto 字体 */
-  font-weight: 300;                  /* 300 权重为细体 */
-  font-size: 18px;                   /* 根据新尺寸设置字号 */
+  font-family: 'Roboto', sans-serif; 
+  font-weight: 300;                  
+  font-size: 18px;                   
   letter-spacing: 1px;
   text-transform: uppercase;
   line-height: 1;
@@ -119,8 +98,8 @@ section {
 
 
 .award-name {
-  background-color: #00000027;
-  color: #000000;
+  background-color: #090909;
+  color: #e6e0e0;
 }
 
 
@@ -145,7 +124,7 @@ svg {
   height: 100vh;
   background: #000;
 }
-/* 线条：白色，线宽0.1，动画结束保持状态 */
+
 line {
   stroke: #fff;
   stroke-width: 0.1;
@@ -154,24 +133,24 @@ line {
   transition: stroke 0.3s ease, stroke-width 0.3s ease;
   cursor: default;
 }
-/* 主线动画：2秒描线 */
+
 #lineMain {
   animation: drawMain 2s linear forwards;
 }
 @keyframes drawMain {
   to { stroke-dashoffset: 0; }
 }
-/* 分支线段动画：1秒描线 */
+
 @keyframes drawSub {
   to { stroke-dashoffset: 0; }
 }
-/* 悬停线条时变色并加粗 */
+
 line:hover {
   stroke: #ff2c8a;
   stroke-width: 0.2;
 }
 
-/* 矩形淡入动画：1秒或更久 */
+
 @keyframes fadeInRect {
   0%   { opacity: 0; }
   100% { opacity: 1; }
@@ -180,19 +159,19 @@ line:hover {
 
 
 .intro {
-  position: relative;    /* 让 .intro 成为定位父容器 */
+  position: relative;    
   width: 100%;
-  min-height: 100vh;     /* 占满可视高度或你需要的高度 */
-  /* 如果有背景或动画，可在这里或用子元素 .some-background 实现 */
+  min-height: 100vh;     
+  
 }
 
-/* 叠加在上层的矩形，居中显示 */
+
 .welcome-overlay {
   position: absolute;
-  top: 50%;              /* 父元素的 50% 高度处 */
-  left: 50%;             /* 父元素的 50% 宽度处 */
-  transform: translate(-50%, -50%); /* 自身宽高的一半，居中 */
-  background-color: rgba(255, 255, 255, 0.9); /* 半透明白 */
+  top: 50%;              
+  left: 50%;             
+  transform: translate(-50%, -50%); 
+  background-color: rgba(255, 255, 255, 0.9); 
   padding: 20px 40px;
   border: 2px solid #333;
   border-radius: 10px;
