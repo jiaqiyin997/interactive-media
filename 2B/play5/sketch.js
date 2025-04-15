@@ -1,3 +1,6 @@
+// Chatgpt was used in the building of this p5 sketch. I made refinements and adjusted the code where necessary.
+
+
 let currentShape;
 let bg;  // 用于保存背景图像
 
