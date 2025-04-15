@@ -12,11 +12,10 @@ function setup() {
 }
 
 function draw() {
-  // Partially fade the background for a trailing effect
-  // The last parameter (10) controls how quickly old frames fade
+  
   background(220, 10);
   
-  // Random circle size within a smaller range for variety
+  
   let circleSize = random(50, 200);
   
   // Randomize colors
@@ -29,7 +28,7 @@ function draw() {
   stroke(r, g, b);
   fill(r, g, b, 70); // Slightly transparent fill
 
-  // Occasionally draw a line across the canvas
+  
   if (random(1) > 0.7) {
     line(random(width), random(height), random(width), random(height));
   }
@@ -37,8 +36,8 @@ function draw() {
   // Draw a circle in the center
   circle(width / 2, height / 2, circleSize);
 
-  // Draw a rotating square at the mouse location
-  push(); // Use push/pop to isolate rotation transformations
+  
+  push(); 
   translate(mouseX, mouseY);
   rotate(frameCount * 0.1); // Adjust rotation speed as desired
   square(0, 0, circleSize);
