@@ -1,3 +1,6 @@
+// Chatgpt was used in the building of this p5 sketch. I made refinements and adjusted the code where necessary.
+
+
 import { awards } from "./data.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -16,9 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // };
 
   const POSITIONS = {
-    BOTTOM: 0,     // 显示第一部分
-    MIDDLE: -50,   // 显示中间（奖项项目部分）
-    TOP: -100      // 显示第三部分（复制的 award-name）
+    BOTTOM: 0,     
+    MIDDLE: -50,   
+    TOP: -100      
   }
   
 
@@ -49,15 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
-    // 绑定点击事件，根据需要选择同页跳转或者新标签页打开
+    
   awardElement.addEventListener("click", () => {
-    // 1) 在同一个标签页中跳转
+    
     window.location.href = award.link; 
 
-    // 或者
-    // 2) 在新标签页中打开
-    // window.open(award.link, "_blank");
-  });
+    
 
     awardsListContainer.appendChild(awardElement);
   });
