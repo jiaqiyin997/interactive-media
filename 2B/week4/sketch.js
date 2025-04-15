@@ -1,3 +1,6 @@
+// Chatgpt was used in the building of this p5 sketch. I made refinements and adjusted the code where necessary.
+
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   // Lower frame rate to exaggerate each draw
