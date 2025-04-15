@@ -1,3 +1,6 @@
+//I used chatGPT for general assistance, and as an education tool throughout my coding process
+
+
 export const awards = [
   {
     name: 'Research_1',
