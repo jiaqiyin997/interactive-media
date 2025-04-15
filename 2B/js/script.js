@@ -1,3 +1,8 @@
+
+
+// Chatgpt was used in the building of this. I made refinements and adjusted the code where necessary.
+
+// In the instance of AI writing entire code blocks which I did not modify, I sought to understand the process behind them.
 import { awards } from "./data.js";
 
 document.addEventListener("DOMContentLoaded", () => {
