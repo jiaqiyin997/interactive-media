@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document with Moved Paragraph &amp; Glowing Heading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Iceland&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .iceland-regular {
+        font-family: "Iceland", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: white;
+        font-family: sans-serif;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+        font-family: "Iceland", sans-serif;
+        text-shadow: 0 0 8px #0f0, 0 0 16px #0f0, 0 0 24px #0f0;
+      }
+
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        display: block;
+      }
+
+      /* 中央大标题，绿色荧光效果 */
+      .hero-text {
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        z-index: 1;
+      }
+      .hero-text h1 {
+        font-family: "Iceland", sans-serif;
+
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin: 0;
+        /* 绿色荧光 */
+        text-shadow: 0 0 8px #0f0, 0 0 16px #0f0, 0 0 24px #0f0;
+      }
+      .hero-text sup {
+        font-size: 1rem;
+        vertical-align: super;
+      }
+      .hero-text .sub {
+        font-size: 1.8rem;
+        font-style: italic;
+        display: block;
+        margin-top: 0.5rem;
+      }
+
+      /* 段落移到右边 */
+      .paragraph {
+        position: absolute;
+        top: 5%;
+        right: 5%; /* 从右侧 5% 开始 */
+        left: auto; /* 禁用左侧定位 */
+        transform: none;
+        max-width: 320px;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #ccc;
+        z-index: 1;
+        text-align: right; /* 可选：右对齐文本 */
+      }
+
+      .info {
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        font-size: 0.8rem;
+        color: #aaa;
+        z-index: 1;
+      }
+
+      .footer {
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        font-size: 3rem;
+        color: white;
+        font-weight: bold;
+        font-family: "Iceland", sans-serif;
+        text-shadow: 0 0 8px #00ff00;
+        z-index: 1;
+      }
+      .cart {
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
+
+      /* gallery-item 容器 */
+      .gallery {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+      .gallery-item {
+        position: absolute;
+        cursor: grab;
+        user-select: none;
+        z-index: 2;
+        text-align: center;
+      }
+      .gallery-item img {
+        max-width: 150px;
+        height: auto;
+        display: block;
+      }
+      .gallery-item figcaption {
+        margin-top: 0.3rem;
+        font-size: 1.2rem;
+        color: white;
+        line-height: 1.2;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="matrix"></canvas>
+
+    <!-- <div class="paragraph">
+    The creative studio and art practice of artist and designer Ali Godil,
+    working globally while based in Portland and New York. It's a vessel of
+    universal love through creative expression. Using design, art and production
+    as a modality for raising consciousness and joy.
+  </div> -->
+
+    <!-- <div class="info">
+    Portland, Oregon<br>
+    unlock @ houseofgul.com<br>
+    97214
+  </div> -->
+
+    <div class="hero-text">
+      <h1>
+        hi, welcome to my site<br />the world of<br />
+        physical computing,<br />
+        Arduino &<br />
+        and other fun stuff<br />
+        <span class="sub"></span>
+      </h1>
+    </div>
+
+    <div class="footer">
+      drag & double click!
+      <div class="cart">component (5)</div>
+    </div>
+
+    <div class="gallery">
+      <figure class="gallery-item">
+        <img
+          src="./images/2075382-40-removebg-preview.png"
+          alt="Gallery Image 1"
+        />
+        <figcaption>research</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img
+          src="./images/Electronic-Component-Potentiometer-removebg-preview.png"
+          alt="Gallery Image 2"
+        />
+        <figcaption>week 7</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img
+          src="./images/Servo-Motor-removebg-preview.png"
+          alt="Gallery Image 3"
+        />
+        <figcaption>week 8</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img
+          src="./images/s50-5439p01wl-removebg-preview.png"
+          alt="Gallery Image 4"
+        />
+        <figcaption>week 9</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img
+          src="./images/F7078669-01-removebg-preview.png"
+          alt="Gallery Image 5"
+        />
+        <figcaption>experiment</figcaption>
+      </figure>
+    </div>
+
+    <script>
+      // Matrix 背景脚本
+      const canvas = document.getElementById("matrix");
+      const ctx = canvas.getContext("2d");
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      const letters =
+        "アァイィウエカキクサシス0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const fontSize = 14;
+      let columns = Math.floor(canvas.width / fontSize);
+      let drops = Array(columns).fill(1);
+
+      function drawMatrix() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#0F0";
+        ctx.font = fontSize + "px monospace";
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = letters.charAt(
+            Math.floor(Math.random() * letters.length)
+          );
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+            drops[i] = 0;
+          drops[i]++;
+        }
+      }
+      setInterval(drawMatrix, 33);
+
+      // 子页面链接
+      const pageUrls = [
+        "research.html",
+        "week7.html",
+        "week8.html",
+        "week9.html",
+        "play.html",
+      ];
+
+      // 定位并添加交互
+      function initGallery() {
+        const positions = [
+          { left: "10%", top: "20%" },
+          { left: "75%", top: "15%" },
+          { left: "50%", top: "60%" },
+          { left: "20%", top: "55%" },
+          { left: "70%", top: "65%" },
+        ];
+        const items = document.querySelectorAll(".gallery-item");
+        items.forEach((item, idx) => {
+          const pos = positions[idx] || { left: "50%", top: "50%" };
+          item.style.left = pos.left;
+          item.style.top = pos.top;
+
+          // 拖拽
+          item.addEventListener("mousedown", function (e) {
+            item.isDragging = true;
+            item.style.cursor = "grabbing";
+            item.dragOffsetX = e.clientX - item.offsetLeft;
+            item.dragOffsetY = e.clientY - item.offsetTop;
+            e.preventDefault();
+          });
+          // 双击跳转
+          item.addEventListener("dblclick", function () {
+            window.location.href = pageUrls[idx] || "#";
+          });
+        });
+
+        document.addEventListener("mousemove", function (e) {
+          items.forEach((item) => {
+            if (item.isDragging) {
+              item.style.left = e.clientX - item.dragOffsetX + "px";
+              item.style.top = e.clientY - item.dragOffsetY + "px";
+            }
+          });
+        });
+        document.addEventListener("mouseup", function () {
+          items.forEach((item) => {
+            if (item.isDragging) {
+              item.isDragging = false;
+              item.style.cursor = "grab";
+            }
+          });
+        });
+      }
+      window.addEventListener("load", initGallery);
+      window.addEventListener("resize", initGallery);
+    </script>
+  </body>
+</html>
