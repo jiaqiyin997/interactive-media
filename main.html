@@ -123,6 +123,20 @@
         /* font-family: "Pacifico"; */
         font-weight: bold;
       }
+      #nextButton1 {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1100;
+        background-color: #fff;
+        color: #000;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        /* font-family: "Pacifico"; */
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
@@ -135,6 +149,7 @@
     
     <!-- Next Page button -->
     <button id="nextButton">2B</button>
+    <button id="nextButton1">2C</button>
     
     <div class="bg-bubbles" id="bgBubbles"></div>
     <div class="container" id="container">
@@ -204,6 +219,9 @@
       // Next Page button: when clicked, navigate to the next page (adjust URL if needed)
       document.getElementById("nextButton").addEventListener("click", function() {
         window.location.href = "./2B/index.html";
+      });
+      document.getElementById("nextButton1").addEventListener("click", function() {
+        window.location.href = "./2C/index.html";
       });
     </script>
   </body>
