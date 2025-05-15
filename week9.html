@@ -21,11 +21,10 @@
         margin: 0;
         padding: 0;
         color: white;
-        
+        font-family: "Iceland", sans-serif;
         overflow: hidden;
         height: 100%;
         width: 100%;
-        font-family: "Iceland", sans-serif;
         text-shadow: 0 0 8px #0f0, 0 0 16px #0f0, 0 0 24px #0f0;
       }
       canvas {
@@ -109,14 +108,14 @@
       }
       .text-at {
         position: absolute;
-        bottom: 25%;
+        bottom: 15%;
         left: 10%;
         font-size: 1.2rem;
         z-index: 1;
       }
       .text-of {
         position: absolute;
-        bottom: 18%;
+        bottom: 5%;
         left: 10%;
         font-size: 1.2rem;
         z-index: 1;
@@ -162,15 +161,27 @@
         /* 加阴影 */
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
       }
-      .sub-img1 { left: 5%;  top: 50%; } /* 图1 */
-      .sub-img2 { left: 60%; top: 5%;  } /* 图2 */
-      .sub-img3 { left: 50%; top: 55%; } /* 图3 */
-      .sub-img4 { left: 15%; top: 80%; } /* 图4 */
+      .sub-img1 {
+        left: 5%;
+        top: 50%;
+      } /* 图1 */
+      .sub-img2 {
+        left: 60%;
+        top: 5%;
+      } /* 图2 */
+      .sub-img3 {
+        left: 50%;
+        top: 55%;
+      } /* 图3 */
+      .sub-img4 {
+        left: 15%;
+        top: 80%;
+      } /* 图4 */
 
       .text-img1 {
         position: absolute;
         left: calc(5% + 180px + 10px);
-        top: 57%;
+        top: 60%;
         transform: translateY(-50%);
         font-size: 1rem;
         color: white;
@@ -203,23 +214,7 @@
         color: white;
         z-index: 1;
       }
-      .footer {
-        position: absolute;
-        bottom: 5%;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-        font-size: 3rem;
-        color: white;
-        font-weight: bold;
-        font-family: "Iceland", sans-serif;
-        text-shadow: 0 0 8px #00ff00;
-        z-index: 1;
-      }
-      .cart {
-        font-size: 0.9rem;
-        margin-top: 0.5rem;
-      }
+
       /* 右侧装饰图 */
       .side-image1 {
         position: absolute;
@@ -243,8 +238,8 @@
       }
       .footer {
         position: absolute;
-        bottom: 50%;
-        left: 50%;
+        bottom: 5%;
+        left: 70%;
         transform: translateX(-50%);
         text-align: center;
         font-size: 3rem;
@@ -254,14 +249,18 @@
         text-shadow: 0 0 8px #00ff00;
         z-index: 1;
       }
+      .cart {
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
     </style>
   </head>
   <body>
     <canvas id="matrix"></canvas>
     <a href="index.html" class="back-btn">&larr; Back</a>
     <div class="footer">
-      double click!
-      <div class="cart">component (5)</div>
+      Arduino
+      <div class="cart">component</div>
     </div>
     <div class="content">
       <div class="text-post">GRAPHIC</div>
@@ -276,63 +275,46 @@
       <div class="text-universe">UNIVERSE</div>
 
       <div class="sub-gallery">
-        <a href="https://www.toiletpapermagazine.org/">
-          <img
-            src="./images/web.png"
-            alt="Sub Visual 1"
-            class="sub-img1"
-          />
+        <a href="#">
+          <img src="./images/week9.JPG" alt="Sub Visual 1" class="sub-img1" />
         </a>
         <div class="text-img1">
-          This website is a very peculiar and creative one. It include
-          <br />some common daily necessities, but they randomly place
-          <br />these stuff on the page, This provided inspiration <br />for my
-          website, which is also placing <br />random objects in random
-          positions. On this basis, <br />I added the draggable property.
+          Using the simplest potentiometer input <br />and p5.js drawing, the three
+          major links of "physical <br />sensing → serial communication → web page
+          visualization" <br />are connected
         </div>
 
-        <a href="detail-2.html">
-          <img
-            src="./images/67ecea910cd669da0a8b2b5e10ca256f.jpg"
-            alt="Sub Visual 2"
-            class="sub-img2"
-          />
+        <a href="#">
+          <img src="./images/week9_1.MP4" alt="Sub Visual 2" class="sub-img2" />
         </a>
         <div class="text-img2">
-          I like the geometric shapes used in this poster, and the way it turns
-          text into a graphical form with lines interspersed in the text,
-          creating a sense of rhythm as a whole. I applied this design, a
-          rhythmic design of text and pictures, to my website design.
+          in this week we not only exercises <br />hardware hands-on ability, but also
+          cultivates real-time <br />interactive design thinking.
         </div>
 
-        <a href="https://makezine.com/article/home/gardening/dog-simple-arduino-controlled-plant-watering/">
+        <a href="#">
           <img
-            src="./images/noPump_1.png"
+            src="./images/花瓣素材_金属抽象液体艺术元素_193294645.png"
             alt="Sub Visual 3"
             class="sub-img3"
           />
         </a>
         <div class="text-img3">
-          Simple Arduino-Controlled, No-Pump Plant Watering. I love this simple
-          and clever design. It basically uses a microcontroller-powered servo
-          motor to pinch a watering hose on/off on a gravity-fed plant watering
-          system. No pump required. It makes me think about the combination of ecology and interactive technology.
+          It shows the charm of "data itself is invisible<br />, only through the
+          shape of graphics can it be <br />within reach" - every tiny turn of the
+          knob becomes a perceptible <br />visual image on the screen.
         </div>
 
-        <a href="https://www.instructables.com/Arduino-Powered-Headdress/">
+        <!-- <a href="detail-4.html">
           <img
-            src="./images/F9PRCI1J0SEMQ0G.png"
+            src="./images/花瓣素材_金属抽象液体艺术元素_193296590.png"
             alt="Sub Visual 4"
             class="sub-img4"
           />
-        </a>
+        </a> -->
         <div class="text-img4">
-          Arduino Powered Headdress. This project recreates Moritz Waldemeyer’s
-          <br />Automaton headdress using 10 mm EVA foam, 5 mm foamboard,
-          <br />15 servos, 85 RGB LEDs, two Arduino Pro Minis, and a backpack
-          <br />control box. It is quite beautiful. It makes me think about
-          aesthetic–technical Synthesis blending compelling visuals with
-          underlying technology.
+          every tiny turn of the knob becomes a <br />perceptible visual image on the
+          screen.
         </div>
       </div>
 
