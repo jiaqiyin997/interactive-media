@@ -67,19 +67,19 @@
         margin-top: 0.5rem;
       }
 
-      /* 段落移到右边 */
+      
       .paragraph {
         position: absolute;
         top: 5%;
-        right: 5%; /* 从右侧 5% 开始 */
-        left: auto; /* 禁用左侧定位 */
+        right: 5%; 
+        left: auto; 
         transform: none;
         max-width: 320px;
         font-size: 0.9rem;
         line-height: 1.5;
         color: #ccc;
         z-index: 1;
-        text-align: right; /* 可选：右对齐文本 */
+        text-align: right; 
       }
 
       .info {
@@ -109,7 +109,7 @@
         margin-top: 0.5rem;
       }
 
-      /* gallery-item 容器 */
+      
       .gallery {
         position: absolute;
         top: 0;
@@ -137,22 +137,15 @@
         line-height: 1.2;
       }
     </style>
+    <!-- I used chatGPT to assist with creating my layout. I also used it for general assistance, and as an education tool throughout my coding process -->
+  <!-- In the instance of AI writing entire code blocks which I did not modify, I sought to understand the process behind them by using the Copilot chat bot. -->
   </head>
   <body>
     <canvas id="matrix"></canvas>
 
-    <!-- <div class="paragraph">
-    The creative studio and art practice of artist and designer Ali Godil,
-    working globally while based in Portland and New York. It's a vessel of
-    universal love through creative expression. Using design, art and production
-    as a modality for raising consciousness and joy.
-  </div> -->
+    
 
-    <!-- <div class="info">
-    Portland, Oregon<br>
-    unlock @ houseofgul.com<br>
-    97214
-  </div> -->
+    
 
     <div class="hero-text">
       <h1>
@@ -208,7 +201,7 @@
     </div>
 
     <script>
-      // Matrix 背景脚本
+    
       const canvas = document.getElementById("matrix");
       const ctx = canvas.getContext("2d");
       function resizeCanvas() {
@@ -242,7 +235,7 @@
       }
       setInterval(drawMatrix, 33);
 
-      // 子页面链接
+   
       const pageUrls = [
         "research.html",
         "week7.html",
@@ -251,7 +244,6 @@
         "play.html",
       ];
 
-      // 定位并添加交互
       function initGallery() {
         const positions = [
           { left: "10%", top: "20%" },
@@ -266,7 +258,7 @@
           item.style.left = pos.left;
           item.style.top = pos.top;
 
-          // 拖拽
+      
           item.addEventListener("mousedown", function (e) {
             item.isDragging = true;
             item.style.cursor = "grabbing";
@@ -274,7 +266,7 @@
             item.dragOffsetY = e.clientY - item.offsetTop;
             e.preventDefault();
           });
-          // 双击跳转
+       
           item.addEventListener("dblclick", function () {
             window.location.href = pageUrls[idx] || "#";
           });
